@@ -10,16 +10,21 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+
       home: MyHomePage(),
-      title: "Flutter Demo",
       theme: ThemeData(
-        primaryColor: Colors.red,
+        primaryColor: Colors.lightBlueAccent,
       ),
     );
   }
 }
 
 class MyHomePage extends StatefulWidget {
+
+  MyHomePage({Key key,this.title}): super(key:key);
+
+  final String title;
+
   @override
   State<StatefulWidget> createState() {
     return MyHomePageState();
@@ -29,23 +34,45 @@ class MyHomePage extends StatefulWidget {
 class MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
 
-  void incrementCounter(){
+  void incrementCounter() {
     setState(() {
       _counter++;
+    });
+  }
+
+  void decrementCounter() {
+    setState(() {
+      _counter--;
     });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.add),
-        tooltip: "Increment",
-        onPressed: () {
-          incrementCounter();
-          print(_counter);
-        },
+      floatingActionButton: Row(
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: [
+          FloatingActionButton(
+            child: Icon(Icons.plus_one ),
+            tooltip: "Increment",
+            onPressed: () {
+              incrementCounter();
+              print(_counter);
+            },
+          ),
+          SizedBox(width: 20,),
+          FloatingActionButton(
+            child: Icon(Icons.exposure_minus_1),
+            tooltip: "Decrement",
+            onPressed: () {
+              decrementCounter();
+              print(_counter);
+            },
+          ),
+        ],
       ),
+
+
       appBar: AppBar(
         title: Text("Flutter demo app"),
         leading: Icon(Icons.burst_mode),
@@ -59,7 +86,10 @@ class MyHomePageState extends State<MyHomePage> {
             ),
             Text(
               "$_counter ",
-              style: Theme.of(context).textTheme.display1,
+              style: Theme
+                  .of(context)
+                  .textTheme
+                  .display1,
             ),
           ],
         ),
